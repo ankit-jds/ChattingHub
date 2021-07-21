@@ -204,6 +204,9 @@ header>h1{
   .list {
     display: none;
   }
+	.main{
+		max-height: 99vh;
+	}
   .chat-window{
   	width: 100%;
   	border-radius: 0;
