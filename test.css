@@ -7,7 +7,6 @@ html{
 }
 
 body{
-	font-size: 16px;
 	margin:0 auto;
 	max-width: 99.5vw;
 	max-height: 100vh;
@@ -33,7 +32,7 @@ header>h1{
 }
 .main{
 	/*min-height: calc(99vh - 12vh);*/
-	max-height: calc(100vh - 15vh);
+	max-height: calc(99.8vh - 12vh);
 	display: flex;
 	justify-content: space-between;
 }
@@ -198,8 +197,8 @@ header>h1{
   html{
   	font-size: 25px;
   }
-  .nav-trigger {
-    display: block;
+  header{
+  	line-height: 2;
   }
   .list {
     display: none;
