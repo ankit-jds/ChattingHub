@@ -15,7 +15,7 @@ body{
 
 header{
 	box-sizing: border-box;
-	max-height: 15vh; 
+	height: 12vh; 
 	padding: 1rem;
 	color: coral;
 	background-color: #1a1c19;
@@ -204,9 +204,6 @@ header>h1{
   .list {
     display: none;
   }
-	.main{
-		max-height: 99vh;
-	}
   .chat-window{
   	width: 100%;
   	border-radius: 0;
