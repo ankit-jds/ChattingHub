@@ -7,6 +7,7 @@ html{
 }
 body{
 	height: 99.5vh;
+	overflow-y: hidden;
 }
 header{
 	margin: 0 auto;
@@ -14,17 +15,75 @@ header{
 	color: gold;
 	text-align: center;
 	padding: 0.6rem;
+	display: flex;
+	align-items: center;
 }
 header h1{
-	font-size: 2.5rem;
+	flex: 2;
+	font-size: 2.3rem;
+}
+.burger{
+	width: 2rem;
+	border: 0;
+}
+.burger:focus{
+	outline: none;
 }
 .main {
 	/*overflow-y: scroll;*/
-	height: calc(100% - 69px);
-	background: yellow;
+	height: calc(100% - (69/16)*1rem - (50/16)*1rem);
+	/*height: calc(100% - 69px - 50px);*/
 }
 .main .list{
 	display: none;
+}
+.main .list.show{
+	display: flex;
+	flex-direction: column;
+	background: #ffb01a;
+	height: 100%;
+}
+.list-head{
+	background: #cdc8c8;
+	border: 3px solid black;
+	border-radius: 0 0 30px 30px;
+	text-align: center;
+	padding: 0.5rem;
+	/*height:calc((74/16)*1rem);*/
+}
+.list-head h3{
+	font-size: 1.8rem;
+}
+.list-display{
+	/*height: calc(100% - 50px);*/
+	height: calc(100% - (50/16)*1rem);
+	overflow-y: scroll;
+}
+.user{
+	display: flex;
+	/*align-items: center;*/
+	overflow-y: hidden;
+	height: 3.5rem;
+	border: 2px dashed black;
+	border-top: 0;
+	padding: 0.5rem;
+}
+.user .usericon{
+	width: 3rem;
+	/*height: 3rem;*/
+	border-radius: 100px;
+	margin-right: 1rem;
+}
+.user .username{
+	font-size: 1.3rem;
+	margin-bottom: 0.2rem;
+}
+
+.stack{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	/*justify-content: space-between;*/
 }
 .chat-window{
 	display: flex;
@@ -36,28 +95,37 @@ header h1{
 	/*overflow-y: scroll;*/
 
 }
+.chat-window.hide{
+	display: none;
+}
 .chat-name{
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
-	padding: 0.5rem;
+	justify-content: space-between;
+	padding: 0.3rem;
 	padding-left: 0.7rem;
 	background: #cdc8c8;
 	border: 3px solid black;
 	border-radius: 0 0 30px 30px;
 }
+.chat-name .head{
+	display: flex;
+	align-items: center;
+}
 .chat-name .usericon{
-	width: 3rem;
-	height: 3rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	margin-right: 0.8rem;
 	border-radius: 50px;
 	border: 2px solid black;
 }
+
 .chat-name .username{
-	font-size: 1.7rem;
+	font-size: 1.6rem;
 }
 .chat-window .chat-display{
-	height: calc(100% - 57.8px - 70px);
+	/*height: calc(100% - 57.8px - 70px);*/
+	height: calc(100% - (57.8/16)*1rem - (70/16)*1rem);
 	overflow-y: scroll;
 }
 .chat-display .message-row{
@@ -106,7 +174,7 @@ header h1{
 .message-input #type-area{
 	border: 0;
 	resize: none;
-	width: 80%;
+	width: 85%;
 	height: 3rem;
 	border-radius: 30px;
 	font-size: 1.3rem;
@@ -118,7 +186,49 @@ header h1{
 }
 
 .message-input .send-button{
+	width: 2rem;
 	font-size: 1.1rem;
-	margin-right: 0.4rem;
+	margin-right: 0.5rem;
+	margin-top: 0.3rem;
 }
-@media(min)
+footer{
+	height: calc((50/16)*1rem);
+	background: black;
+	color: white;
+	text-align: center;
+}
+footer h2{
+	font-size: 1.2rem;
+	line-height: 2.5;
+}
+@media(min-width: 956px){
+	html{
+		font-size: 20px;
+	}
+	.burger{
+		display: none;
+	}
+	.main{
+		display: flex;
+		justify-content: space-between;
+	}
+	.main .list{
+		display: flex;
+		flex-direction: column;
+		background: #ffb01a;
+		height: 100%;
+		width: 25%;
+	}
+	.main .chat-window{
+		width: 74%;
+	}
+	.chat-window{
+		border:2px dashed black;
+		border-top: 0;
+		border-bottom: 0;
+	}
+	.chat-window .chat-name,.message-input{
+		margin: 0 -2px;
+	}
+	
+}
