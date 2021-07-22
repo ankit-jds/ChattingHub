@@ -1,0 +1,124 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+	font-size: 16px;
+}
+body{
+	height: 99.5vh;
+}
+header{
+	margin: 0 auto;
+	background: black;
+	color: gold;
+	text-align: center;
+	padding: 0.6rem;
+}
+header h1{
+	font-size: 2.5rem;
+}
+.main {
+	/*overflow-y: scroll;*/
+	height: calc(100% - 69px);
+	background: yellow;
+}
+.main .list{
+	display: none;
+}
+.chat-window{
+	display: flex;
+	flex-direction: column;
+	/*justify-content: flex-end;*/
+	background: #9dffed;
+	/*padding:0 0.5rem;*/
+	height: 100%;
+	/*overflow-y: scroll;*/
+
+}
+.chat-name{
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0.5rem;
+	padding-left: 0.7rem;
+	background: #cdc8c8;
+	border: 3px solid black;
+	border-radius: 0 0 30px 30px;
+}
+.chat-name .usericon{
+	width: 3rem;
+	height: 3rem;
+	margin-right: 0.8rem;
+	border-radius: 50px;
+	border: 2px solid black;
+}
+.chat-name .username{
+	font-size: 1.7rem;
+}
+.chat-window .chat-display{
+	height: calc(100% - 57.8px - 70px);
+	overflow-y: scroll;
+}
+.chat-display .message-row{
+	display: flex;
+	align-items: flex-end;
+	margin: 0.3rem;
+}
+.message-row .message{
+	display: inline-flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	max-width: 80%;
+	background: coral;
+	padding: 0.2rem 0.1rem 0.1rem 0.4rem;
+	border-radius: 0 20px 20px 0;
+}
+.message-row.typer{
+	margin-right: 0.5rem;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+}
+.message.typer{
+	border-radius: 20px 0 0 20px;
+}
+.message .text{
+	font-size: 1.3rem;
+	margin-right: 1rem;
+}
+.message .timestamp{
+	font-size: 0.85rem;
+	font-weight: bold;
+	opacity: 0.6;
+	margin-right: 0.3rem;
+}
+.message-row .share-button{
+	width: .8rem;
+}
+.message-input{
+	background: #3e3c3d;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.2rem;
+	border-radius: 30px 30px 0 0;
+}
+.message-input #type-area{
+	border: 0;
+	resize: none;
+	width: 80%;
+	height: 3rem;
+	border-radius: 30px;
+	font-size: 1.3rem;
+	line-height: 2;
+	padding: 0.1rem 0.2rem 0.1rem 0.7rem;
+}
+#type-area:focus{
+	outline: none;
+}
+
+.message-input .send-button{
+	font-size: 1.1rem;
+	margin-right: 0.4rem;
+}
+@media(min)
