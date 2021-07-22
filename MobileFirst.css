@@ -125,7 +125,7 @@ header h1{
 }
 .chat-window .chat-display{
 	/*height: calc(100% - 57.8px - 70px);*/
-	height: calc(100% - (57.8/16)*1rem - (70/16)*1rem);
+	height: calc(100% - (57.8/16)*1rem - (58/16)*1rem);
 	overflow-y: scroll;
 }
 .chat-display .message-row{
