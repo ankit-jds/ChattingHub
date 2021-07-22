@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Test Site</title>
 	<!-- <link rel="stylesheet" type="text/css" href="test.css"> -->
@@ -12,13 +12,15 @@
 <body>
 	<!-- <div class="extra"></div> -->
 	<header>
-		<h1>Chatting Hub....</h1>
+		<h1>Chatting Hub</h1>
+		<img class="burger" src="icons/orange-burger.png" />
 	</header>
 	<div class="main">
 		<section class="list">
-			<div class="list-head fl ">
+			<div class="list-head">
 				<!-- <img class="usericon iw" src="icons/user1.svg" /> -->
-				<h3>FRIENDS List</h3>
+				<h3>Chat List</h3>
+				<!-- <img class="burger" src="icons/white-hamburger.jpg" /> -->
 			</div>
 			<div class="list-display">	
 				<ul>
@@ -110,8 +112,11 @@
 		<section class="chat-window">
 			<!-- <div class="user extra"></div> -->
 			<div class="chat-name fl">
-				<img class="usericon" src="icons/user1.svg" />
-				<h3 class="username">Ankit Tamboli</h3>
+				<div class="head">
+					<img class="usericon" src="icons/user1.svg" />
+					<h3 class="username">Ankit Tamboli</h3>
+				</div>
+				<!-- <img class="burger" src="icons/white-hamburger.jpg" /> -->
 			</div>
 			<div class="chat-display">
 				<div class="message-row" >
@@ -178,11 +183,17 @@
 
 			<div class="message-input">
 					<textarea id="type-area" placeholder="Enter your message" cols="20" rows="1"></textarea>
-					<input type="button" src="icons/user4.png" class="send-button" id="send-button" value="Send" />
+					<!-- <input type="button" src="icons/user4.png" class="send-button" id="send-button" value="Send" /> -->
+					<a href="#">
+						<img class="send-button" src="icons/white-send.png">
+					</a>
 			</div>
 		</section>
+
 	</div>
-	
+	<footer>
+		<h2>Created by Ankit Tamboli</h2>
+	</footer>
 <script src='test.js'></script>
 
 </body>
