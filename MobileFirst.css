@@ -68,7 +68,7 @@ header h1{
 	border-top: 0;
 	padding: 0.5rem;
 }
-.user .usericon{
+.usericon{
 	width: 3rem;
 	/*height: 3rem;*/
 	border-radius: 100px;
@@ -110,22 +110,23 @@ header h1{
 }
 .chat-name .head{
 	display: flex;
-	align-items: center;
+	height: 3.5rem;
 }
-.chat-name .usericon{
-	width: 2.5rem;
+/*.chat-name .usericon{
+	width: 3.5rem;
 	height: 2.5rem;
 	margin-right: 0.8rem;
 	border-radius: 50px;
 	border: 2px solid black;
-}
+}*/
 
 .chat-name .username{
+	margin-top: 0.8rem;
 	font-size: 1.6rem;
 }
 .chat-window .chat-display{
 	/*height: calc(100% - 57.8px - 70px);*/
-/* 	height: calc(100% - (57.8/16)*1rem - (58/16)*1rem); */
+	height: calc(100% - (57.8/16)*1rem - (58/16)*1rem);
 	overflow-y: scroll;
 }
 .chat-display .message-row{
@@ -201,6 +202,7 @@ footer h2{
 	font-size: 1.2rem;
 	line-height: 2.5;
 }
+
 @media(min-width: 956px){
 	html{
 		font-size: 20px;
@@ -220,7 +222,11 @@ footer h2{
 		width: 25%;
 	}
 	.main .chat-window{
+		display: flex;
 		width: 74%;
+	}
+	.main .chat-window.hide{
+		display: flex;
 	}
 	.chat-window{
 		border:2px dashed black;
