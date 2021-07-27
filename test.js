@@ -53,7 +53,7 @@ function change_chat(event){
 	var username=element.querySelector('.username').textContent;
 	var usericon=element.querySelector('.usericon').src;
 
-	const chat_name=document.querySelector('.chat-name');
+	const chat_name=document.querySelector('.cn');
 	var chat_username=chat_name.querySelector('.username');
 	chat_username.textContent=username;
 	var chat_usericon=chat_name.querySelector('.usericon');
