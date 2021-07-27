@@ -76,7 +76,7 @@ function addMsgToChatWindow(event){
 						</p>
 						<p class="timestamp">${msg_timestamp[0]}</p>
 					</div>
-					<img class="share-button" src="/static/ChattingApp/icons/reply.png" />
+					<img class="share-button" src="/static/icons/reply.png" />
 				</div>`;
 		element.innerHTML+=code;
 		document.getElementById('type-area').value="";
