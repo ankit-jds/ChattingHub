@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-{% load static %}
+<!-- {% load static %} -->
 <html lang="en">
 <html>
 <head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Chatting Hub</title>
-	<!-- <link rel="stylesheet" type="text/css" href="test.css"> -->
-	<link rel="stylesheet" type="text/css" href="{% static '/ChattingApp/css/MobileFirst.css'%}">
+	<link rel="stylesheet" type="text/css" href="static/css/MobileFirst.css">
+<!-- 	<link rel="stylesheet" type="text/css" href="{% static '/ChattingApp/css/MobileFirst.css'%}"> -->
 </head>
 <body>
 	<header>
 		<div class="head">
-			<img class="burger toggle" data-target="list" src="{% static '/ChattingApp/icons/orange-burger.png'%}" />
+			<img class="burger toggle" data-target="list" src="static/icons/orange-burger.png" />
 			<u><h1>C</h1><h2>hatting Hub</h2></u>
 		</div>
 		<div class="log-details">
 			<div class="logged_in hide">
-					<img class="usericon m" src="friends/SonGoku.png" />
+					<img class="usericon m" src="static/friends/SonGoku.png" />
 				<div>
 					<p><em><b>Ankit Tamboli</b></em></p>
 				<button class="btn logout">Logout</button>
@@ -53,7 +55,7 @@
 				<fieldset>
 					<legend> SignUp </legend>
 					<div class="avatar_disp">
-						<img class="avatar" src="{% static '/ChattingApp/images/SonGoku.png' %}">
+						<img class="avatar" src="static/friends/SonGoku.png">
 					</div>
 					<label>Avatar : </label><br>
 					<input type="file" class="file_in" name="username" placeholder="Enter your username" /><br>
@@ -74,7 +76,7 @@
 		<section class="list">
 			<div class="chat-name">
 				<div class="head">
-					<img class="usericon" src="{% static '/ChattingApp/icons/friends.png'%}" />
+					<img class="usericon" src="static/icons/friends.png" />
 					<h3 class="username">Chat List</h3>
 					<!-- <img class="burger" src="icons/white-hamburger.jpg" /> -->
 				</div>
@@ -96,7 +98,7 @@
 		<section class="chat-window">
 			<div class="chat-name">
 				<div class="head">
-					<img class="usericon" src="icons/user1.svg" />
+					<img class="usericon" src="static/icons/user1.svg" />
 					<h3 class="username">Ankit Tamboli</h3>
 				</div>
 			</div>
@@ -107,14 +109,14 @@
 						<p class="timestamp">10:39pm</p>
 						<!-- <img class="reply-button" src="icons/reply.png"></img> -->
 					</div>
-					<img class="share-button" src="{% static '/ChattingApp/icons/reply.png' %}"></img>
+					<img class="share-button" src="static/icons/reply.png"></img>
 				</div>
 				<div class="message-row typer">
 					<div class="message typer">
 						<p class="text">Hello my name is Divya...</p>
 						<p class="timestamp">10:39pm</p>
 					</div>
-						<img class="share-button" src="icons/reply.png"></img>
+						<img class="share-button" src="static/icons/reply.png"></img>
 					<!-- <img class="share-button " src="icons/reply.png"></img> -->
 				</div>
 				<div class="message-row">
@@ -129,7 +131,7 @@
 						<span class="timestamp">6:55am</span>
 						<!-- <img class="reply-button" src="icons/reply.png"></img> -->
 					</div>
-					<img class="share-button " src="icons/reply.png"></img>
+					<img class="share-button " src="static/icons/reply.png"></img>
 				</div>
 				<div class="message-row typer">
 					<div class="message typer">
@@ -143,7 +145,7 @@
 						<span class="timestamp">6:55am</span>
 						<!-- <img class="reply-button" src="icons/reply.png"></img> -->
 					</div>
-					<img class="share-button " src="icons/reply.png"></img>
+					<img class="share-button " src="static/icons/reply.png"></img>
 				</div>
 				
 				<div class="message-row typer">
@@ -157,7 +159,7 @@
 						</p>
 						<span class="timestamp">6:55am</span>
 					</div>
-						<img class="share-button" src="icons/reply.png"></img> 
+						<img class="share-button" src="static/icons/reply.png"></img> 
 					 <!-- <img class="share-button " src="icons/reply.png"></img>  -->
 				</div>
 
@@ -167,7 +169,7 @@
 					<textarea id="type-area" placeholder="Enter your message" cols="20" rows="1"></textarea>
 					<!-- <input type="button" src="icons/user4.png" class="send-button" id="send-button" value="Send" /> -->
 					<a href="#">
-						<img class="send-button" src="{% static '/ChattingApp/icons/white-send.png'%}">
+						<img class="send-button" src="static/icons/white-send.png">
 					</a>
 			</div>
 		</section>
@@ -176,8 +178,8 @@
 	<footer>
 		<h2>Created by Ankit Tamboli</h2>
 	</footer>
-	<script src="{% static '/ChattingApp/js/jquery-3.6.0.js'%}"></script>
-	<script src="{% static '/ChattingApp/js/test.js'%}"></script>
+	<script src="static/js/jquery-3.6.0.js"></script>
+	<script src="static/js/test.js"></script>
 
 </body>
 </html>
