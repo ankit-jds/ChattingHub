@@ -21,18 +21,28 @@ function prepare(){
 		addMsgToChatWindow(event);
 	},false);
 
-	// For Orange burger menu toggling....
-	const menu=document.querySelector('.burger');
-	const list=document.querySelector('.list');
-	const chatWindow=document.querySelector('.chat-window');
-	//the arrow style of function is new type to declare functions
-	menu.addEventListener('click',()=>{
-		//toggle helps to add and remove class when event occurs
-		list.classList.toggle('show');
-		chatWindow.classList.toggle('hide');
-	} 
-	)
-}
+
+	//event listener for toggle buttons  
+	// i.e.{burger,login_btn,signup_btn}
+	$('.toggle').on('click',function(){
+		$trget=$(this).attr('data-target');
+		element=$(`.${$trget}`);
+
+		if ($trget!='list'){
+			$burger.hide();
+		};
+
+		if (is_shown(element)){
+			$('section').slideUp();
+			normal_view();
+		}
+		else{
+			hide_all();
+			show($trget);
+		};
+	});
+
+};
 
 function change_chat(event){
 	var element=event.target;
@@ -48,7 +58,9 @@ function change_chat(event){
 	chat_username.textContent=username;
 	var chat_usericon=chat_name.querySelector('.usericon');
 	chat_usericon.src=usericon;
-}
+
+};
+
 
 function addMsgToChatWindow(event){
 	var element=document.getElementsByClassName('chat-display')[0];
@@ -68,8 +80,9 @@ function addMsgToChatWindow(event){
 				</div>`;
 		element.innerHTML+=code;
 		document.getElementById('type-area').value="";
-	}
-}
+	};
+
+};
 
 // For generating timestamp for messages when they are posted....
 function timestamp(){
@@ -80,14 +93,102 @@ function timestamp(){
 		var hour="0"+msg_hour;
 	}else{
 		hour=msg_hour;
-	}
+	};
 	if (msg_mins<10){
 		var mins="0"+msg_mins;
 	}else{
 		mins=msg_mins;
-	}
+	};
 	const msg_timestamp=hour+":"+mins;
 	return [msg_timestamp,msg_datetime];
-}
+};
+
+
+
+const $burger=$('.burger');
+const $login=$('.login');
+const $signup=$('.signup');
+const $chat=$('.chat-window');
+const $list=$('.list');
+
+shown=['chat-window'];
+hidden=['login','signup','list'];
+
+//array function to check if an element is present or not
+function in_array(array,element){
+	index=array.indexOf(element);
+	if (index>-1){
+		return true;
+	};
+	return false;
+};
+//array function to remove an element
+function remove_fa(array,element){
+	if(in_array(array,element)){
+		index=array.indexOf(element);
+		array.splice(index,1);
+	};
+};
+//function to flex the display of an element
+function flex_it(element){
+	if (element.css('display')!='flex'){
+		element.css('display','flex');
+	};
+};
+//func to check if element is hidden or not
+function is_shown(element){
+	if (element.css('display')!='none'){
+		return true;
+	};
+};
+//func to return to normal view
+function normal_view(){
+	$burger.show();
+	$chat.slideDown();
+	shown=['chat-window'];
+	hidden=['login','signup','list'];
+};
+//func to show an element
+function show(element){
+	//show the element
+	$(`.${element}`).slideDown();
+	flex_it($(`.${element}`));
+
+	//add element to shown if not present
+	if(!in_array(shown,element)){
+		shown.push(element);
+	};
+
+	//remove element form hidden if it is there
+	if (in_array(hidden,element)){
+		remove_fa(hidden,element);
+	};
+
+};
+//func to hide an element
+function hide(element){
+	//hide the element
+	$(`.${element}`).slideUp();
+
+	//add element to hidden if not present
+	if(!in_array(hidden,element)){
+		hidden.push(element);
+	};
+
+	//remove element form shown if it is there
+	if (in_array(shown,element)){
+		remove_fa(shown,element);
+	};
+
+};
+//func to hide all elememts
+function hide_all(){
+	//hide the element
+	for (var i = 0; i < shown.length; i++) {
+		console.log(shown.length)
+		hide(shown[i]);
+	}
+};
+
 
 
