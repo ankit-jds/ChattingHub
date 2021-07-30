@@ -52,7 +52,7 @@
 		</section>
 		<section class="signup form" id="signup">
 			<form request="post">
-				<fieldset>
+<!-- 				<fieldset>
 					<legend> SignUp </legend>
 					<div class="avatar_disp">
 						<img class="avatar" src="static/friends/SonGoku.png">
@@ -69,6 +69,41 @@
 					<input type="date" name="birthdate" placeholder="Enter your Birth Date" /><br>
 					<div class="submit_btn">
 						<input type="button" class="submit" name="submit" value="submit" />
+					</div>
+				</fieldset> -->
+				<fieldset>
+					<legend> SignUp </legend>
+					<div class="scroll">
+						<div class="top_form">
+							<div class="avatar_disp">
+								<label><h2>Avatar</h2></label>
+								<img class="avatar" src="static/friends/SonGoku.png">
+								<input type="file" class="file_in" id="avatar" name="avatar" />
+							</div>
+							<div class="basic">
+								<label class="lsform">First Name : </label>
+								<input type="text" id="fname" name="fname" placeholder="Enter your First Name" />
+								<label class="lsform">Last Name : </label>
+								<input type="text" id="lname" name="lname" placeholder="Enter your Last Name" />
+								<label class="lsform">About You : </label>
+								<input type="text" id="bio" name="bio" placeholder="Enter About You" />
+								<label class="lsform">Birth Date: </label>
+								<input type="date" id="birthdate" name="birthdate" />
+							</div>
+							<div class="auth_info">
+								<label class="lsform">Email* : </label>
+								<input type="email" id="email" name="email" placeholder="Enter your E-mail" />
+								<label class="lsform">Username : </label>
+								<input type="text" id="username" name="username" placeholder="Enter your username" />
+								<label class="lsform">Password : </label>
+								<input type="password" id="password" name="password" placeholder="Enter your password" />
+								<label class="lsform">Confirm Password : </label>
+								<input type="password" id="confirm_pass" name="confirm_pass" placeholder="Enter your password again" required="" />
+							</div>
+						</div>
+					</div>
+					<div class="submit_btn">
+						<input type="submit" class="submit" name="submit" value="SUBMIT" />
 					</div>
 				</fieldset>
 			</form>
