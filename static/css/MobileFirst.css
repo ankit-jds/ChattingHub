@@ -10,6 +10,10 @@ body{
 	overflow-y: hidden;
 	background: black;
 }
+a{
+	text-decoration: none;
+	color: black;
+}
 header{
 	margin: .3rem;
 	background: black;
@@ -51,6 +55,7 @@ header h2{
 }
 .login-btns div{
 	display: flex;
+	justify-content: space-around;
 }
 .login-btns.hide{
 	display: none;
@@ -142,6 +147,9 @@ nav{
 	/*overflow-y: scroll;*/
 	height: calc(100% - (86/16)*1rem - (50/16)*1rem);
 	/*height: calc(100% - 69px - 50px);*/
+}
+.main.slide{
+	display: none;
 }
 .main .list{
 	display: none;
@@ -387,9 +395,6 @@ footer h2{
    opacity:1
 }
 
-.input{
-  margin-left:135px
-}
 /*tooltip*/
 
 
@@ -408,7 +413,7 @@ footer h2{
 .form form{
 	box-sizing: border-box;
 	/*margin: auto auto;*/
-	width: calc((336/16)*1rem);
+	width: 80%;
 	/*height: calc((159/16)*1rem);*/
 }
 .form legend{
@@ -417,7 +422,8 @@ footer h2{
 	border: 2px solid black;
 	border-radius: 100px;
 	/*padding: 0.5rem;*/
-	width: calc((246/16)*1rem);
+	width: 80%;
+	margin:0 auto 0 auto;
 	text-align: center;
 	background: crimson;
 }
@@ -426,6 +432,7 @@ footer h2{
 	border-radius: 10px;
 	background: coral;
 	padding: 0.5rem 2.4rem 1rem 2.4rem;
+	
 }
 fieldset .submit_btn{
 	display: flex;
@@ -435,39 +442,98 @@ fieldset .submit_btn{
 	border: 0;
 	border-radius: 20px;
 	padding: 0.5rem;
-	margin-bottom: 0.4rem;
+	/*margin-bottom: 0.3rem;*/
 	margin-left: 0.7rem;
 }
 .form label{
 	font-size: 1.2rem;
 	font-weight: bold;
-	margin-bottom: 0.2rem;
+	/*margin-bottom: 0.2rem;*/
 }
 .form .submit{
 	font-size: 1.3rem;
 	font-weight: bold;
-	margin-right: 1rem;
+
+}
+/*login form*/
+.log_top{
+	display: flex;
+	flex-direction: column;
+}
+.lt{
 
 }
 
 /*Sign up form*/
-.avatar{
-	border-radius: 30px;
-	width: 5rem;
+.signup form {
+	height: 90%;
+}
+.signup fieldset{
+	height: 96%;
+	overflow-y: scroll;
+	padding: 1rem 2.5rem 2rem 2rem;
+}
+.avatar_disp,.basic,.auth_info{
+	display: flex;
+	flex-direction: column;
 }
 .avatar_disp{
-	display: flex;
-	justify-content: center;
+	align-items: center;
+}
+.avatar_disp img{
+	/*height: calc((234/20)*1rem);*/
+	border-radius: 30px;
+	margin: 0 0 0.5rem 0;
 }
 .file_in{
 	width: calc(((244*14)/240)*1rem);
-	/*width: 14rem;*/
 	background: black;
 	color: #9999b2;
 }
-.file_in button{
-	background: black;
+.submit_btn{
+	padding: 0.5rem 1rem 0.5rem 0; 
+}
+.lsform{
+	margin-top: 0.4rem;
+}
+/*DOWN For validation errors*/
+label.error{
+	font-size: 0.9rem;
 	color: white;
+	font-style: italic;
+	margin-left: 1.3rem;
+	background: #2e2eee;
+	border-radius: 20px;
+	padding-left: 0.4rem; 
+	width: 70%;
+	/*margin-bottom: 0.3rem;*/
+}
+/* UP For validation errors*/
+
+.close {
+	/*border: 0;*/
+	border-radius: 30px;
+	width: 1.5rem;
+	height: 1.5rem;
+	color: white;
+	background: red;
+	font-weight: bold;
+}
+.alert {
+	font-size: 1.2rem;
+	margin: 0.3rem;
+	padding: 0.2rem 1rem;
+	display: flex;
+	justify-content: space-between;
+}
+.success{
+	background: #77fb77;
+}
+.error{
+	background: #f23e3e;
+}
+.debug{
+	background: yellow;
 }
 
 /*media queries*/
@@ -476,35 +542,66 @@ fieldset .submit_btn{
 	html{
 		font-size: 20px;
 	}
-	/*.logged_in{
-		display: 
-	}*/
 	.burger{
 		display: none;
 	}
-	.main{
+	.flex{
 		display: flex;
 		justify-content: space-between;
 	}
-	.main .list{
-		display: flex;
-		width: 25%;
-
-	}
-	.main .chat-window{
-		display: flex;
-		width: 74%;
-	}
-	.main .chat-window.hide{
+	.chat-window,.main .list{
 		display: flex;
 	}
 	.chat-window{
-		border:2px dashed black;
-		border-top: 0;
-		border-bottom: 0;
+		width: 73%;
 	}
-	.chat-window .chat-name,.message-input{
-		margin: 0 -2px;
+	.list{
+		width: 26.5%;
 	}
-	
+	.login form{
+		width: 40%;
+	}
+	.signup form{
+		width: auto;
+	}
+	fieldset{
+		display: flex;
+		flex-direction: column;
+	}
+	.signup fieldset{
+		height: auto;
+		padding-bottom: 0;
+	}
+	.signup,.login{
+		width: 100%;
+	}
+	.signup form{
+		height: auto;
+	}
+	.top_form{
+		display: flex;
+		justify-content: center;
+	}
+	.avatar_disp img{
+		height: calc((234/20)*1rem);
+		width: auto;
+		margin: 0 0 0.5rem 0;
+	}
+	.basic{
+		justify-content: center;
+		margin:0 2.5rem;
+	}
+	.file_in{
+		width: calc(((200*14)/240)*1rem);
+	}
+	.auth_info{
+		justify-content: center;
+	}
+	.avatar_disp,.basic,.auth_info{
+		height: calc((392/20)*1rem);
+	}
+	.submit_btn{
+		padding: 1rem 1rem 1rem 0; 
+	}
+				
 }
