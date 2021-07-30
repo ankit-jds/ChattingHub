@@ -7,13 +7,9 @@ function prepare(){
 	//This line erases the type area and changes its value to none.
 	document.getElementById('type-area').value='';
 
-	//This is to add event listeners to all users iin chatlist...
-	var chat_list=document.querySelectorAll('.user');
-	for (var i=0 ; i < chat_list.length; i++){
-		chat_list[i].addEventListener('click',function(event){
-			change_chat(event);
-		},false);
-	}
+	//this is to reset the forms...
+	$('#validate_s').trigger("reset");
+	$('#validate_l').trigger("reset");
 
 	//this is to add event listener to send button...
 	var send_button=document.getElementsByClassName('send-button');
@@ -21,12 +17,24 @@ function prepare(){
 		addMsgToChatWindow(event);
 	},false);
 
-
+	reset();
 	//event listener for toggle buttons  
 	// i.e.{burger,login_btn,signup_btn}
 	$('.toggle').on('click',function(){
 		$trget=$(this).attr('data-target');
 		element=$(`.${$trget}`);
+		if($trget=='login' ||$trget=='signup'){
+			if (is_shown($(`.${$trget}`))){
+				console.log(is_shown($(`.${$trget}`)));
+				$('.slide').slideUp();
+				$('.flex').slideDown();
+
+			}
+			else{
+				$('.flex').slideUp();
+				$('.slide').slideDown();
+			};
+		};
 
 		if ($trget!='list'){
 			$burger.hide();
@@ -43,6 +51,10 @@ function prepare(){
 	});
 
 };
+//event for close button of messages
+$('.close').on('click',function(){
+	$('.alert').remove()
+})
 
 function change_chat(event){
 	var element=event.target;
@@ -110,9 +122,15 @@ const $login=$('.login');
 const $signup=$('.signup');
 const $chat=$('.chat-window');
 const $list=$('.list');
-
-shown=['chat-window'];
-hidden=['login','signup','list'];
+function reset(){
+	if(window.innerWidth<956){
+		shown=['chat-window'];
+		hidden=['login','signup','list'];
+	}else{
+		shown=['chat-window','list'];
+		hidden=['login','signup'];
+	};
+};
 
 //array function to check if an element is present or not
 function in_array(array,element){
@@ -143,10 +161,13 @@ function is_shown(element){
 };
 //func to return to normal view
 function normal_view(){
-	$burger.show();
+	if (window.innerWidth<956){
+		$burger.show();
+	}else{
+		$list.slideDown();
+	}
 	$chat.slideDown();
-	shown=['chat-window'];
-	hidden=['login','signup','list'];
+	reset();
 };
 //func to show an element
 function show(element){
@@ -166,7 +187,7 @@ function show(element){
 
 };
 //func to hide an element
-function hide(element){
+function hide(element,hide_all_bool){
 	//hide the element
 	$(`.${element}`).slideUp();
 
@@ -176,7 +197,7 @@ function hide(element){
 	};
 
 	//remove element form shown if it is there
-	if (in_array(shown,element)){
+	if (hide_all_bool & in_array(shown,element)){
 		remove_fa(shown,element);
 	};
 
@@ -185,10 +206,53 @@ function hide(element){
 function hide_all(){
 	//hide the element
 	for (var i = 0; i < shown.length; i++) {
-		console.log(shown.length)
+		console.log(shown.length);
 		hide(shown[i]);
-	}
+	};
+	shown=[];
 };
+
+//Signup Form
+$('#validate_s input:file').change(function(){
+	$('#validate_s img.avatar').attr('src',URL.createObjectURL(this.files[0]));
+});
+$('#validate_s').validate({
+	// onfocusout:true,
+	// onkeyup:true,
+	rules:{
+		fname:"required",
+		username:"required",
+
+		email:{
+			required:true,
+			email:true
+		},
+		password:{
+			required:true,
+			minlength: 6
+		},
+		confirm_pass:{
+			equalTo:"#password"
+		}
+		
+	},
+	messages:{
+		fname: "Enter your first name",
+		email: "Enter your email",
+		username: "Enter your username",
+		password: "Enter your password",
+		confirm_pass: "Enter same as above",
+	},
+});
+$('#validate_l').validate({
+	rules:{
+		lgusername:"required",
+		lgpass:"required"
+		
+	},
+});
+//Sign up form
+
 
 
 
