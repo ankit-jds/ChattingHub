@@ -206,7 +206,6 @@ function hide(element,hide_all_bool){
 function hide_all(){
 	//hide the element
 	for (var i = 0; i < shown.length; i++) {
-		console.log(shown.length);
 		hide(shown[i]);
 	};
 	shown=[];
@@ -215,14 +214,26 @@ function hide_all(){
 //Signup Form
 $('#validate_s input:file').change(function(){
 	$('#validate_s img.avatar').attr('src',URL.createObjectURL(this.files[0]));
+	if (this.files[0].size/1024 <70){
+		var filesize=this.files[0].size
+		console.log(filesize/1024)
+
+	}
 });
+$.validator.addMethod('filesize', function (value, element, param) {
+    return this.optional(element) || (element.files[0].size <= param)
+}, 'File size must be less than {0}');
+
 $('#validate_s').validate({
 	// onfocusout:true,
 	// onkeyup:true,
 	rules:{
 		fname:"required",
 		username:"required",
-
+		avatar:{
+			extension:"jpg,jpeg,png",
+			filesize:61440
+		},
 		email:{
 			required:true,
 			email:true
@@ -235,8 +246,13 @@ $('#validate_s').validate({
 			equalTo:"#password"
 		}
 		
+		
 	},
 	messages:{
+		avatar:{
+			extension:"File extension must be .jpg, .jpeg, .png ",
+			filesize:"File size exceeds 60KB",
+		},
 		fname: "Enter your first name",
 		email: "Enter your email",
 		username: "Enter your username",
