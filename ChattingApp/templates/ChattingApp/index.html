@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Chatting Hub</title>
+	<!-- <link rel="stylesheet" type="text/css" href="test.css"> -->
+	<link rel="stylesheet" type="text/css" href="{% static '/ChattingApp/css/MobileFirst.css'%}">
+</head>
+<body>
+	<header>
+		<div class="head">
+			<img class="burger toggle" data-target="list" src="{% static '/ChattingApp/icons/orange-burger.png'%}" />
+			<u><h1>C</h1><h2>hatting Hub</h2></u>
+		</div>
+		<div class="log-details">
+			{% if user.is_authenticated %}
+			<div class="logged_in">
+					<img class="usericon m" src="/media/{{user.profile.usericon}}" />
+				<div>
+					<p><em><b>{{user.username}}</b></em></p>
+				<button class="btn logout"><a href="logout">Logout</a></button>
+				</div>
+			</div>
+			{% else %}
+			<div class="login-btns">
+				<p><em><b>Anonymous user</b></em></p>
+				<div>
+					<button tooltip="Log-In to Account" tooltip-position="bottom" class="btn log_in toggle" id="login_btn" data-target="login">Login</button>
+					<button tooltip="Sign-Up to Create Account" tooltip-position="bottom" class="btn signup_btn toggle" id="signup_btn" data-target="signup">Sign up</button>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</header>
+	{% for message in messages  %}            
+      <div class="alert {{ message.tags }}">
+            <div><strong>Message : </strong> {{ message }}</div>
+            <button type="button" class="close">
+              <span >&times;</span>
+            </button>
+      </div>
+      {% endfor %} 
+		
+	<div class="main slide">
+		<section class="login form" id="login">
+			<form action="login/" method="post" id="validate_l">
+				 {% csrf_token %}
+				<fieldset>
+					<legend> Login </legend>
+					<div class="log_top">					
+						<label>Username : </label>
+						<input type="text" name="lgusername" id="lgusername" placeholder="Enter your username" />
+						<label>Password : </label>
+						<input type="password" name="lgpass" id="lgpass" placeholder="Enter your password" />
+					</div>
+					<div class="submit_btn lt"> 
+						<input type="submit" class="submit" name="submit" value="submit" />
+					</div>
+				</fieldset>
+			</form>
+		</section>
+		<section class="signup form" id="signup">
+			<form enctype="multipart/form-data" action="signup/" id="validate_s" method="post">
+				 {% csrf_token %}
+				<fieldset>
+					<legend> SignUp </legend>
+					<div class="scroll">
+						<div class="top_form">
+							<div class="avatar_disp">
+								<label><h2>Avatar</h2></label>
+								<img class="avatar" src="{% static '/ChattingApp/images/SonGoku.png' %}">
+								<input type="file" class="file_in" id="avatar" name="avatar" />
+							</div>
+							<div class="basic">
+								<label class="lsform">First Name : </label>
+								<input type="text" id="fname" name="fname" placeholder="Enter your First Name" />
+								<label class="lsform">Last Name : </label>
+								<input type="text" id="lname" name="lname" placeholder="Enter your Last Name" />
+								<label class="lsform">About You : </label>
+								<input type="text" id="bio" name="bio" placeholder="Enter About You" />
+								<label class="lsform">Birth Date: </label>
+								<input type="date" id="birthdate" name="birthdate" />
+							</div>
+							<div class="auth_info">
+								<label class="lsform">Email* : </label>
+								<input type="email" id="email" name="email" placeholder="Enter your E-mail" />
+								<label class="lsform">Username : </label>
+								<input type="text" id="username" name="username" placeholder="Enter your username" />
+								<label class="lsform">Password : </label>
+								<input type="password" id="password" name="password" placeholder="Enter your password" />
+								<label class="lsform">Confirm Password : </label>
+								<input type="password" id="confirm_pass" name="confirm_pass" placeholder="Enter your password again" required="" />
+							</div>
+						</div>
+					</div>
+					<div class="submit_btn">
+						<input type="submit" class="submit" name="submit" value="SUBMIT" />
+					</div>
+				</fieldset>
+			</form>
+		</section>
+	</div>
+	<div class="main flex">
+		<section class="list">
+			<div class="chat-name">
+				<div class="head">
+					<img class="usericon" src="{% static '/ChattingApp/icons/friends.png'%}" />
+					<h3 class="username">Chat List</h3>
+				</div>
+			</div>
+			<div class="list-display">
+				{% if user.is_authenticated %}
+				<ul>
+					{% for i in chat_list %}
+					{% if i != user %}
+					<a class="open" href="#">
+						<li class="user" id="{{i.id}}">
+							<img class="usericon" src="/media/{{i.profile.usericon}}" />
+							<div class="stack">
+								<h3 class="username">{{i.username}}</h3>
+								<p>{{i.profile.about_me}}</p>
+							</div>
+						</li>
+					</a>
+					{% endif %}
+					{% endfor %}
+				</ul>
+				{% else %}
+				<h2 class="">Please login to have a chat...</h2>
+				{% endif %}
+			</div>
+		</section>
+		
+		
+		<section class="chat-window show">
+			<div class="chat-name cn">
+				<div class="head">
+					<img class="usericon" src="{% static '/ChattingApp/icons/user1.svg' %}" />
+					<h3 class="username">Demo User</h3>
+				</div>
+			</div>
+			<div class="chat-display">
+				{% for i in msgs %}
+				<div class="message-row {% if i.msg_sender == user %} typer {% endif %}" >
+					<div class="message {% if i.msg_sender == user %} typer {% endif %} ">
+						<p class="text">{{i.msg_text}}</p>
+						<p class="timestamp">{{i.msg_time|date:"h:ia"}}</p>
+					</div>
+					<img class="share-button" src="{% static '/ChattingApp/icons/reply.png' %}"></img>
+				</div>
+				{%endfor%}
+
+				<div class="message-row typer">
+					<div class="message typer">
+						<p class="text"> <b><em>Login / Signup to chat in real</em>
+							</b><br>
+							This is a example message....<br>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						</p>
+						<span class="timestamp">6:55am</span>
+					</div>
+						<img class="share-button" src="{% static '/ChattingApp/icons/reply.png' %}"></img>
+				</div>
+
+			</div>
+
+			<div class="message-input">
+				<textarea id="type-area" placeholder="Enter your message" cols="2" rows="1"></textarea>
+				<img class="send-button" src="{% static '/ChattingApp/icons/white-send.png'%}"/>
+			</div>
+		</section>
+
+	</div>
+	<footer>
+		<h2>Created by Ankit Tamboli</h2>
+	</footer>
+	<script src="{% static '/ChattingApp/js/jquery-3.6.0.min.js'%}"></script>
+	<script src="{% static '/ChattingApp/js/jquery.validate.min.js'%}"></script>
+	<script src="{% static '/ChattingApp/js/additional-methods.js'%}"></script>
+	<script src="{% static '/ChattingApp/js/test.js'%}"></script>
+
+</body>
+</html>

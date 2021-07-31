@@ -11,11 +11,11 @@ function prepare(){
 	$('#validate_s').trigger("reset");
 	$('#validate_l').trigger("reset");
 
-	//this is to add event listener to send button...
-	var send_button=document.getElementsByClassName('send-button');
-	send_button[0].addEventListener('click',function (event) {
-		addMsgToChatWindow(event);
-	},false);
+	// //this is to add event listener to send button...
+	// var send_button=document.getElementsByClassName('send-button');
+	// send_button[0].addEventListener('click',function (event) {
+	// 	addMsgToChatWindow(event);
+	// },false);
 
 	reset();
 	//event listener for toggle buttons  
@@ -206,7 +206,6 @@ function hide(element,hide_all_bool){
 function hide_all(){
 	//hide the element
 	for (var i = 0; i < shown.length; i++) {
-		console.log(shown.length);
 		hide(shown[i]);
 	};
 	shown=[];
@@ -215,14 +214,26 @@ function hide_all(){
 //Signup Form
 $('#validate_s input:file').change(function(){
 	$('#validate_s img.avatar').attr('src',URL.createObjectURL(this.files[0]));
+	if (this.files[0].size/1024 <70){
+		var filesize=this.files[0].size
+		console.log(filesize/1024)
+
+	}
 });
+$.validator.addMethod('filesize', function (value, element, param) {
+    return this.optional(element) || (element.files[0].size <= param)
+}, 'File size must be less than {0}');
+
 $('#validate_s').validate({
 	// onfocusout:true,
 	// onkeyup:true,
 	rules:{
 		fname:"required",
 		username:"required",
-
+		avatar:{
+			extension:"jpg,jpeg,png",
+			filesize:61440
+		},
 		email:{
 			required:true,
 			email:true
@@ -235,8 +246,13 @@ $('#validate_s').validate({
 			equalTo:"#password"
 		}
 		
+		
 	},
 	messages:{
+		avatar:{
+			extension:"File extension must be .jpg, .jpeg, .png ",
+			filesize:"File size exceeds 60KB",
+		},
 		fname: "Enter your first name",
 		email: "Enter your email",
 		username: "Enter your username",
@@ -255,4 +271,101 @@ $('#validate_l').validate({
 
 
 
+// url= openChat/
+// data= user id of user that is {{i.id}}
 
+$('a.open').on('click',function(e){
+	if(window.innerWidth<956){
+		$list.slideUp();
+		$chat.slideDown();
+	}
+	e.preventDefault();
+	var element=event.target;
+	while(element.tagName!="LI"){
+		var parent=element.parentElement;
+		var element=parent;
+	}
+	var userid=element.id
+	$.ajax({
+		url:'Chat/',
+		data: {
+			'userid': userid
+		},
+		dataType: 'json',
+		success: function (data) {
+			if (data["is_valid"]) {
+				change_chat(e)
+				last_msg_id=data['msgs'][data['msgs'].length-1]["id"]
+				if ($(`#msg${last_msg_id}`).length == 0){
+					$('.chat-display').html("")
+					for (var i = 0; i < data["msgs"].length; i++) {
+						code=""
+						if (data["msgs"][i]["sender"] == data["username"]){
+							code+=`<div class="message-row typer" 
+							id='msg${data["msgs"][i]["id"]}'>
+						<div class="message typer">`
+						}
+						else{
+							code+=`<div class="message-row" id='msg${data["msgs"][i]["id"]}'>
+						<div class="message">`
+						};
+						code+=`<p class="text">${data["msgs"][i]["text"]}</p>
+						<p class="timestamp">${data["msgs"][i]["time"]}</p>
+						</div>
+						<img class="share-button" src="/static/ChattingApp/icons/reply.png" />
+					</div>`
+
+					$('.chat-display').attr('id',data['chat_id']).append(code);
+					};
+				}else{
+					alert("All messages are already loaded...")
+				};
+			}
+			else {
+				console.log('elseis working')
+				change_chat(e)
+				$('.chat-display').attr('id',data['chat_id']).html(' ');
+				alert(data["alert"]);
+						
+			};
+			}
+		});
+});
+
+// 
+
+
+
+$('.send-button').on('click',function(){
+	var message=$('#type-area').val();
+	$('#type-area').val('');
+	if (message !=""){
+		var chat_id=$('.chat-display').attr('id')
+		if (chat_id !=undefined ){
+			$.ajax({
+				url:'postMsg/',
+				data:{
+					"chatId":chat_id,
+					"message":message
+				},
+				dataType:'json',
+				success:function(data){
+					code=`<div class="message-row typer" id='msg${data["msg"]["id"]}'>
+							<div class="message typer">
+								<p class="text">${data["msg"]["text"]}</p>
+								<p class="timestamp">${data["msg"]["time"]}</p>
+							</div>
+							<img class="share-button" src="/static/ChattingApp/icons/reply.png" />
+						</div>`;
+			$('.chat-display').append(code);
+
+				}
+			});
+		}
+		else{
+			alert("Enter a Chat or Login ")
+		};
+	}else{
+		alert("Enter something Blank msgs are worthless!!")
+	};
+})
